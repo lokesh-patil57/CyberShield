@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Cybersecurity Quiz</h1>
+
+<div class="quiz-container mt-4">
+    <div id="quiz-intro">
+        <h3>Test Your Knowledge</h3>
+        <p>Select a module to start the quiz:</p>
+        <select id="quizModule" class="form-select mb-3">
+            <option value="basics">Basics of Cybersecurity</option>
+            <option value="password">Password Security</option>
+            <option value="social">Social Engineering</option>
+        </select>
+        <button id="startQuiz" class="btn btn-primary">Start Quiz</button>
+    </div>
+
+    <div id="quiz-questions" style="display: none;">
+        <div id="question-container" class="card mb-4">
+            <div class="card-body">
+                <h4 id="question-text"></h4>
+                <div id="options-container" class="mt-3"></div>
+            </div>
+        </div>
+        <button id="submitAnswer" class="btn btn-primary">Submit Answer</button>
+    </div>
+
+    <div id="quiz-results" style="display: none;">
+        <h3>Quiz Results</h3>
+        <div id="score-container" class="alert alert-info"></div>
+        <div id="answers-review"></div>
+        <button id="retakeQuiz" class="btn btn-primary">Take Another Quiz</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+{% endblock %}

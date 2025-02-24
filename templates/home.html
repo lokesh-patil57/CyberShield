@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="hero-section">
+    <h1>Stay Safe in the Digital World</h1>
+    <p class="lead">Learn about cybersecurity threats and how to protect yourself online.</p>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-8">
+        <h2>Latest Cyber Threats</h2>
+        <div class="threat-cards">
+            <div class="card mb-3">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b" class="card-img-top" alt="Cybersecurity Threat">
+                <div class="card-body">
+                    <h5 class="card-title">Ransomware Attacks on the Rise</h5>
+                    <p class="card-text">Learn about the latest ransomware threats and how to protect your data.</p>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <img src="https://images.unsplash.com/photo-1563452619267-bc16ef6cecec" class="card-img-top" alt="Phishing Attack">
+                <div class="card-body">
+                    <h5 class="card-title">Phishing Scams Alert</h5>
+                    <p class="card-text">Stay informed about sophisticated phishing techniques targeting users.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="newsletter-section">
+            <h3>Cyber Security Newsletter</h3>
+            <p>Stay updated with the latest security news and tips.</p>
+            <form class="newsletter-form">
+                <div class="mb-3">
+                    <input type="email" class="form-control" placeholder="Enter your email">
+                </div>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
