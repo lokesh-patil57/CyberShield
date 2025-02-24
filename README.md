@@ -8,7 +8,7 @@ A comprehensive cybersecurity awareness platform featuring educational content, 
 - Educational blogs and learning modules
 - Security tools (Password Generator, URL Scanner)
 - Knowledge assessment quizzes
-- AI-powered chatbot using Gemini API
+- AI-powered chatbot using Gemini API with RAG (Retrieval Augmented Generation)
 - Dark/Light theme toggle
 
 ## Prerequisites
@@ -40,7 +40,7 @@ venv\Scripts\activate
 
 3. Install required packages:
 ```cmd
-pip install flask flask-sqlalchemy google-generativeai requests email-validator gunicorn
+pip install flask flask-sqlalchemy google-generativeai requests email-validator gunicorn langchain-google-genai langchain faiss-cpu pypdf
 ```
 
 4. Clone or download the project files to your directory
@@ -110,7 +110,8 @@ http://localhost:5000
    - Answer review system
 
 5. **AI Chatbot**
-   - Powered by Google's Gemini API
+   - Powered by Google's Gemini API with RAG
+   - Context-aware responses
    - Real-time cybersecurity assistance
    - Interactive chat interface
 
@@ -138,3 +139,4 @@ http://localhost:5000
 - The application runs in debug mode by default
 - Always keep your Gemini API key secure
 - The chat feature requires an active internet connection
+- RAG functionality requires the provided PDF file in the correct location

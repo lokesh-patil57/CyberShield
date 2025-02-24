@@ -20,6 +20,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     "Ransomware"
                 ],
                 correct: 2
+            },
+            {
+                question: "What is the first step in securing a system?",
+                options: [
+                    "Installing antivirus software",
+                    "Risk assessment",
+                    "Creating backups",
+                    "Setting up firewalls"
+                ],
+                correct: 1
             }
         ],
         password: [
@@ -40,6 +50,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     "Every 3-6 months",
                     "Every day",
                     "Only when compromised"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which password practice is most secure?",
+                options: [
+                    "Writing passwords in a notebook",
+                    "Using a password manager",
+                    "Using the same password with different numbers",
+                    "Using short, memorable passwords"
                 ],
                 correct: 1
             }
@@ -64,6 +84,38 @@ document.addEventListener('DOMContentLoaded', function() {
                     "Contains company logo"
                 ],
                 correct: 2
+            },
+            {
+                question: "What is the best defense against social engineering?",
+                options: [
+                    "Antivirus software",
+                    "Firewall",
+                    "Security awareness training",
+                    "Complex passwords"
+                ],
+                correct: 2
+            }
+        ],
+        network: [
+            {
+                question: "What is a firewall?",
+                options: [
+                    "A physical wall that protects servers",
+                    "A security system that monitors network traffic",
+                    "A type of computer virus",
+                    "A backup system"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which network protocol is more secure?",
+                options: [
+                    "HTTP",
+                    "HTTPS",
+                    "FTP",
+                    "SMTP"
+                ],
+                correct: 1
             }
         ]
     };
@@ -85,11 +137,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function showQuestion() {
         const question = quizData[currentQuiz][currentQuestion];
         questionText.textContent = `Question ${currentQuestion + 1}: ${question.question}`;
-        
+
         optionsContainer.innerHTML = '';
         question.options.forEach((option, index) => {
             const button = document.createElement('button');
-            button.className = 'option-btn';
+            button.className = 'option-btn btn btn-outline-primary mb-2';
             button.textContent = option;
             button.dataset.index = index;
             button.addEventListener('click', selectOption);
@@ -100,27 +152,42 @@ document.addEventListener('DOMContentLoaded', function() {
     function selectOption(e) {
         document.querySelectorAll('.option-btn').forEach(btn => {
             btn.classList.remove('selected');
+            btn.classList.remove('btn-primary');
+            btn.classList.add('btn-outline-primary');
         });
         e.target.classList.add('selected');
+        e.target.classList.remove('btn-outline-primary');
+        e.target.classList.add('btn-primary');
     }
 
     function showResults() {
         const scoreContainer = document.getElementById('score-container');
         const answersReview = document.getElementById('answers-review');
-        
+
         const percentage = (score / quizData[currentQuiz].length) * 100;
         scoreContainer.textContent = `Your score: ${score}/${quizData[currentQuiz].length} (${percentage}%)`;
-        
+
         answersReview.innerHTML = '';
         answers.forEach((answer, index) => {
             const question = quizData[currentQuiz][index];
             const div = document.createElement('div');
             div.className = 'mb-3';
+            const isCorrect = answer === question.correct;
             div.innerHTML = `
-                <p><strong>Question ${index + 1}:</strong> ${question.question}</p>
-                <p>Your answer: ${question.options[answer]}</p>
-                <p>Correct answer: ${question.options[question.correct]}</p>
-                <hr>
+                <div class="card ${isCorrect ? 'border-success' : 'border-danger'}">
+                    <div class="card-body">
+                        <h5 class="card-title">Question ${index + 1}</h5>
+                        <p>${question.question}</p>
+                        <p class="text-${isCorrect ? 'success' : 'danger'}">
+                            Your answer: ${question.options[answer]}
+                        </p>
+                        ${!isCorrect ? `
+                        <p class="text-success">
+                            Correct answer: ${question.options[question.correct]}
+                        </p>
+                        ` : ''}
+                    </div>
+                </div>
             `;
             answersReview.appendChild(div);
         });
@@ -131,11 +198,11 @@ document.addEventListener('DOMContentLoaded', function() {
         currentQuestion = 0;
         score = 0;
         answers = [];
-        
+
         quizIntro.style.display = 'none';
         quizQuestions.style.display = 'block';
         quizResults.style.display = 'none';
-        
+
         showQuestion();
     });
 
@@ -148,13 +215,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const answer = parseInt(selected.dataset.index);
         answers.push(answer);
-        
+
         if (answer === quizData[currentQuiz][currentQuestion].correct) {
             score++;
         }
 
         currentQuestion++;
-        
+
         if (currentQuestion < quizData[currentQuiz].length) {
             showQuestion();
         } else {
