@@ -5,10 +5,11 @@ import requests
 from urllib.parse import urlparse
 
 app = Flask(__name__)
+# Ensure proper secret key configuration
 app.secret_key = os.environ.get("SESSION_SECRET", "your-secret-key")
 
 # Configure Gemini API
-GEMINI_API_KEY = "AIzaSyAejNhQKzAZHXfvcj-84L0YFQZuso8NAlo"
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyAejNhQKzAZHXfvcj-84L0YFQZuso8NAlo")
 genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel('gemini-pro')
 
