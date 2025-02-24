@@ -134,3 +134,63 @@ body {
         border-radius: 10px 10px 0 0;
     }
 }
+
+/* Add these styles at the end of the existing CSS file */
+
+.module-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.module-meta {
+    margin-bottom: 2rem;
+}
+
+.module-introduction {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.section {
+    margin-bottom: 2rem;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tips-box {
+    background-color: #f8f9fa;
+    border-left: 4px solid var(--primary-color);
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.module-summary {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 30px 0;
+}
+
+.module-resources {
+    margin-top: 30px;
+}
+
+.module-resources ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.module-resources li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.breadcrumb {
+    margin-bottom: 2rem;
+}

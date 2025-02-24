@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="module-content">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/blogs">Learning Modules</a></li>
+            <li class="breadcrumb-item active">{{ module.title }}</li>
+        </ol>
+    </nav>
+
+    <h1>{{ module.title }}</h1>
+    <div class="module-meta mb-4">
+        <span class="badge bg-primary">{{ module.difficulty }}</span>
+        <span class="text-muted ms-3">Reading time: {{ module.reading_time }} minutes</span>
+    </div>
+
+    <div class="module-introduction mb-4">
+        <h2>Introduction</h2>
+        <p>{{ module.introduction }}</p>
+    </div>
+
+    <div class="module-sections">
+        {% for section in module.sections %}
+        <div class="section mb-4">
+            <h3>{{ section.title }}</h3>
+            <p>{{ section.content }}</p>
+            {% if section.tips %}
+            <div class="tips-box bg-light p-3 rounded">
+                <h4>💡 Pro Tips:</h4>
+                <ul class="mb-0">
+                    {% for tip in section.tips %}
+                    <li>{{ tip }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="module-summary bg-light p-4 rounded mb-4">
+        <h3>Key Takeaways</h3>
+        <ul>
+            {% for point in module.key_points %}
+            <li>{{ point }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="module-resources">
+        <h3>Additional Resources</h3>
+        <ul>
+            {% for resource in module.resources %}
+            <li><a href="{{ resource.url }}" target="_blank">{{ resource.title }}</a> - {{ resource.description }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
