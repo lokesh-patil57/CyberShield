@@ -1,11 +1,10 @@
 from flask import Flask, render_template, jsonify, request
-import google.generativeai as genai
 import os
 import requests
 from urllib.parse import urlparse
+import google.generativeai as genai
 
 app = Flask(__name__)
-# Ensure proper secret key configuration
 app.secret_key = os.environ.get("SESSION_SECRET", "your-secret-key")
 
 # Configure Gemini API
@@ -15,6 +14,7 @@ model = genai.GenerativeModel('gemini-pro')
 
 @app.route('/')
 def home():
+    print("Accessing home route")  # Debug print
     return render_template('home.html')
 
 @app.route('/blogs')
@@ -36,6 +36,7 @@ def chat():
         response = model.generate_content(user_message)
         return jsonify({'response': response.text})
     except Exception as e:
+        print(f"Chat error: {str(e)}")  # Debug print
         return jsonify({'error': str(e)}), 500
 
 @app.route('/scan-url', methods=['POST'])
@@ -43,11 +44,15 @@ def scan_url():
     url = request.json['url']
     try:
         parsed_url = urlparse(url)
-        response = requests.get(f"https://api.virustotal.com/v3/domains/{parsed_url.netloc}")
         # This is a mock response since we don't have a real API key
         return jsonify({
             'safe': True,
             'message': 'URL appears to be safe'
         })
     except Exception as e:
+        print(f"URL scan error: {str(e)}")  # Debug print
         return jsonify({'error': str(e)}), 500
+
+if __name__ == '__main__':
+    print("Starting Flask application...")  # Debug print
+    app.run(host='0.0.0.0', port=5000, debug=True)
